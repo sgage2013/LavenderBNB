@@ -17,6 +17,8 @@ const validateReview = [
         .withMessage("Stars must be an integer from 1 to 5"),
     handleValidationErrors,
   ];
+
+  
 //creating a review image
 router.post("/:reviewId/images", requireAuth, async (req, res, next) => {
     const reviewId = parseInt(req.params.reviewId);
