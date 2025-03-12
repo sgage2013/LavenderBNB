@@ -56,7 +56,7 @@ module.exports = {
       url: "https://www.google.com/imgres?q=audubon%20zoo&imgurl=https%3A%2F%2Fwww.tclf.org%2Fsites%2Fdefault%2Ffiles%2Fstyles%2Ffull_width%2Fpublic%2Fthumbnails%2Fimage%2FAudubonZoo_feature_2016_KyleJacobson-PeterSummerlin_004.jpg%3Fitok%3DMkfVffQu&imgrefurl=https%3A%2F%2Fwww.tclf.org%2Flandscapes%2Faudubon-zoo&docid=fdKdZAVLZkaCuM&tbnid=32wXIfK_Qr15TM&vet=12ahUKEwj2hq-b3biLAxVyjLAFHQtGC58QM3oECGQQAA..i&w=1200&h=675&hcb=2&ved=2ahUKEwj2hq-b3biLAxVyjLAFHQtGC58QM3oECGQQAA",
     },
 
-   ], { validate: true});
+   ], );
   },
 
   async down (queryInterface, Sequelize) {
