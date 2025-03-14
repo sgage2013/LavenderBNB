@@ -3,9 +3,7 @@ const express = require('express');
 const router = express.Router();
 const apiRouter = require('./api');
 
-router.post('/api/test', (req, res) => {
-  res.json({ message: "Test successful!" });
-});
+
 
 
 router.use('/api', apiRouter);
