@@ -8,6 +8,7 @@ import { Provider } from 'react-redux'
 import configureStore from './store/store.js'
 import { restoreCSRF, csrfFetch } from './store/csrf.js'
 import * as sessionActions from './store/sessions';
+import { Modal, ModalProvider } from './context/modal.jsx'
 
 const store = configureStore();
 if (import.meta.env.MODE !== 'production'){
@@ -21,10 +22,14 @@ if (process.env.NODE_ENV !== 'production'){
 }
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Provider store={store}>
-    <App />
-  </Provider>
+    <ModalProvider>
+      <Provider store={store}>
+       <App />
+       <Modal />
+      </Provider>
+    </ModalProvider>
   </StrictMode>,
 )
+
 
 
