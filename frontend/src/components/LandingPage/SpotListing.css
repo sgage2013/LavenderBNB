@@ -1,0 +1,4 @@
+.spot-listing{
+    display: grid;
+    grid-template-columns: 250px repeat(auto-fill, 250px) 
+}
