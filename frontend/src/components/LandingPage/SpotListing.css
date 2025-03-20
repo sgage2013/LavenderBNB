@@ -2,3 +2,8 @@
     display: grid;
     grid-template-columns: 250px repeat(auto-fill, 250px) 
 }
+.spot-photo{
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+}
