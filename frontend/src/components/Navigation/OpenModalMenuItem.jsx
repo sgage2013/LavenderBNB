@@ -1,6 +1,7 @@
-import { useModal } from '../../context/modal'
+import React from 'react';
+import { useModal } from '../../context/modal';
 
-function OpenModalButton({
+function OpenModalMenuItem({
   modalComponent, 
   itemText, 
   onItemClick, 
@@ -14,7 +15,9 @@ function OpenModalButton({
     if (typeof onItemClick === "function") onItemClick();
   };
 
-  return <button onClick={onClick}>{itemText}</button>;
+  return (
+    <li onClick={onClick}>{itemText}</li>
+  );
 }
 
-export default OpenModalButton;
+export default OpenModalMenuItem;

@@ -16,12 +16,13 @@ module.exports = {
         address: "1 Canal St",
         city: "New Orleans",
         state: "Louisiana",
-        country: "Unites States of America",
+        country: "United States of America",
         lat: 3.14152965,
         lng: 3.14152965,
         name: "Audubon Aquarium",
-        description: "This is aan Aquraium",
+        description: "This is an Aquraium",
         price: 1000,
+        previewImage: "https://ssl.cdn-redfin.com/photo/166/bigphoto/319/2238319_2.jpg"
         
       },
       {
@@ -35,6 +36,7 @@ module.exports = {
         name: "Home away from home",
         description: "This home is near the city but far enough to be in the country",
         price: 1500.00,
+        previewImage: "https://ssl.cdn-redfin.com/photo/166/bigphoto/319/2238319_2.jpg"
         
       },
       {
@@ -48,6 +50,7 @@ module.exports = {
         name: "White House",
         description: "This is Where the president lives",
         price: 10000.00,
+        previewImage: "https://ssl.cdn-redfin.com/photo/166/bigphoto/319/2238319_2.jpg"
         
       },
       {
@@ -61,6 +64,7 @@ module.exports = {
         name: "Jefferson Memorial",
         description: "This is The jefferson memorial",
         price: 500.00,
+        previewImage: "https://ssl.cdn-redfin.com/photo/166/bigphoto/319/2238319_2.jpg"
        
       },
       {
@@ -74,6 +78,7 @@ module.exports = {
         name: "lincoln Memorial",
         description: "This is the Lincoln Memorial",
         price: 750.25,
+        previewImage: "https://ssl.cdn-redfin.com/photo/166/bigphoto/319/2238319_2.jpg"
        
       },
       {
@@ -87,6 +92,7 @@ module.exports = {
         name: "USS Alabama",
         description: "This is the USS alabama",
         price: 55.00,
+        previewImage: "https://ssl.cdn-redfin.com/photo/166/bigphoto/319/2238319_2.jpg"
        
       },
       {
@@ -100,6 +106,7 @@ module.exports = {
         name: "Buc-ee'si",
         description: "This is a buc-ee's",
         price: 800.00,
+        previewImage: "https://ssl.cdn-redfin.com/photo/166/bigphoto/319/2238319_2.jpg"
        
       },
       {
@@ -113,6 +120,7 @@ module.exports = {
         name: "St. Louis Cathedral",
         description: "This is a very old church",
         price: 1200.00,
+        previewImage: "https://ssl.cdn-redfin.com/photo/166/bigphoto/319/2238319_2.jpg"
         
       },
       {
@@ -126,6 +134,7 @@ module.exports = {
         name: "Caesars Superdome",
         description: "This is a the home of the New Orleans' saints",
         price: 2800.00,
+        previewImage: "https://ssl.cdn-redfin.com/photo/166/bigphoto/319/2238319_2.jpg"
         
       },
       {
@@ -139,6 +148,7 @@ module.exports = {
         name: "Audubon Zoo",
         description: "This is a zoo",
         price: 700.00,
+        previewImage: "https://ssl.cdn-redfin.com/photo/166/bigphoto/319/2238319_2.jpg"
        
       },
 

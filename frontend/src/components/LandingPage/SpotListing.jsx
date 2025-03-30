@@ -1,46 +1,38 @@
-import React, { useEffect, useState} from "react";
-import { Link } from 'react-router-dom'
-import './SpotListing.css';
-import noPhoto from '../../assets/images/noPhoto.png'
+import{ useEffect} from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { getAllSpots } from "../../store/Spots/spotThunks";
+import { getUserSpot } from "../../store/Spots/spotThunks";
+import SpotTile from "./SpotTile";
 
-function SpotTile ({ spot }) {
-    const {id, name, city, state, price, SpotImages, rating} = spot;
-    const spotRating = rating ? rating: 'New'
-    const imgSrc = (SpotImages && SpotImages.length > 0 && SpotImages[0].url) ? SpotImages[0].url : noPhoto
-    return  (
-        <div className="spot-name">
-            <Link to={`/spots/${id}`} className="spot-link">
-            <img src={imgSrc}
-            alt={name}
-            className="spot-photo"
-            />
-            </Link>
-          
-            <div className="spot-details">
-                <h2>{name}</h2>
-                <p>{city}, {state}</p>
-                <p>${price} per night</p>
-                <p>Rating: {spotRating}</p>
-                </div>
-        </div>
-    )
-}
+
+
 function SpotListing() {
-    const [spots, setSpots] = useState([]);
+    const dispatch = useDispatch();
+    const spots = useSelector(state => state.spots.allSpots)
+    const user = useSelector(state => state.session.user);
+    const userSpots = useSelector(state => state.spots.userSpots)
+    const spotsArray = Object.values(spots || {})
+
 
     useEffect(() => {
-        fetch(getAllSpots)
-            .then((res) => res.json())
-            // console.log(spotsData)
-            .then((spotsData) => setSpots(spotsData.Spots))
-    }, [])
+        if(!spots){
+            dispatch(getAllSpots())
+        }
+    }, [dispatch, spots])
+
+        useEffect(() => {
+        if(Object.keys(userSpots).length && user){
+        dispatch(getUserSpot())
+        }
+    }, [dispatch, userSpots, user])
+   
+    
 
 
 return (
     <div className="spot-listing">
-        {spots.length > 0 ? (
-            spots.map((spot) => (
+        {spotsArray.length > 0 ? (
+            spotsArray.map((spot) => (
                 <SpotTile key={spot.id} spot={spot}/>
             ))
         ) : (

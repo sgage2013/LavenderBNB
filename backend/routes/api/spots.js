@@ -62,6 +62,7 @@ const checkBookingConflicts = async (req, res, next) => {
 
  //Add Query Filters to get all Spots + GET ALL SPOTS
  router.get('/', async (req, res, next) => {
+  console.log('hellooooooooo')
   const { 
     minLat,
     maxLat,
@@ -70,13 +71,13 @@ const checkBookingConflicts = async (req, res, next) => {
     minPrice,
     maxPrice,
   } = req.query;
-let {page=1,size=10}=req.query;
+let {page, size}=req.query;
   const where = {};
   // Add filters based on query parameters
-  if(page<1) page = 1;
-  if(page >10) page = 10;
-  if(size >20) size = 20; 
-  if(size <10) size = 10;
+  if(page && page<1) page = 1;
+  if(page && page >10) page = 10;
+  if(size && size >20) size = 20; 
+  if(size && size <10) size = 10;
   if (minLat) where.lat = { [Op.gte]: parseFloat(minLat) };
   if (maxLat) where.lat = { ...where.lat, [Op.lte]: parseFloat(maxLat) };
   if (minLng) where.lng = { [Op.gte]: parseFloat(minLng) };
@@ -88,8 +89,9 @@ let {page=1,size=10}=req.query;
     const spots = await Spot.findAll({
       where,
       limit: size,
-      offset: (page - 1) * size,
+      offset: page && size ? (page - 1) * size : undefined,
     });
+    console.log('spot:', spots)
     return res.json({ 'Spots':spots})
 
 
@@ -103,7 +105,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
   const { user } = req;
   try {
     const spots = await Spot.findAll({
-      where: { ownerId: user.id }
+      where: { ownerId: req.user.id }
     });
     return res.json({ 'Spots': spots });
   } catch (err) {
@@ -116,11 +118,17 @@ router.get('/:spotId', async (req, res, next) => {
   const spotId = parseInt(req.params.spotId);
   try {
     const spot = await Spot.findByPk(spotId, {
-      include: [SpotImage, User]
-    
+      include: [
+        { model: SpotImage},
+        {
+          model: User,
+          attributes: ['firstName', 'lastName']
+        }
+        ]
     });
+
     if(!spot){
-      res.status(404).json({ 'message': "Spot couldn't be found" });
+      return res.status(404).json({ 'message': "Spot couldn't be found" });
     }
      res.json({'Spot': spot});
   } catch (err) {
@@ -130,7 +138,7 @@ router.get('/:spotId', async (req, res, next) => {
 
 // Create a Spot
 router.post('/', requireAuth, async (req, res, next) => {
-  const { address, city, state, country, lat, lng, name, description, price } = req.body;
+  let { address, city, state, country, lat, lng, name, description, price, previewImage } = req.body;
 
   // Validation Errors
   const errors = {};
@@ -143,7 +151,9 @@ router.post('/', requireAuth, async (req, res, next) => {
   if (!name || name.length > 50) errors.name = "Name must be less than 50 characters";
   if (!description) errors.description = "Description is required";
   if (price === undefined || price <= 0) errors.price = "Price per day must be a positive number";
+  if (!previewImage) errors.previewImage = 'Preview image is required'
 
+  console.log(req.body)
   // If any errors exist, return a 400 response
   if (Object.keys(errors).length > 0) {
       return res.status(400).json({
@@ -163,9 +173,9 @@ router.post('/', requireAuth, async (req, res, next) => {
           lng,
           name,
           description,
-          price
+          price,
+          previewImage
       });
-
       return res.status(201).json(newSpot);
   } catch (err) {
       next(err);
@@ -175,15 +185,19 @@ router.post('/', requireAuth, async (req, res, next) => {
 
 //EDIT A SPOT
 router.put('/:spotId', requireAuth, async (req, res, next) => {
+  console.log('updating spot with id', req.params.spotId)
+  console.log('body:', req.body)
   const { spotId } = req.params;
   const { user } = req;
   const { address, city, state, country, lat, lng, name, description, price } = req.body;
+console.log('Incoming data:', req.body)
 
   try {
       const spot = await Spot.findByPk(spotId);
       if (!spot) {
           return res.status(404).json({ message: "Spot couldn't be found" });
       }
+console.log('existing spot:', spot)
 
       // Check if the current user is the owner of the spot
       if (spot.ownerId !== user.id) {
@@ -196,8 +210,8 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
       if (!city) errors.city = "City is required";
       if (!state) errors.state = "State is required";
       if (!country) errors.country = "Country is required";
-      if (lat === undefined || lat < -90 || lat > 90) errors.lat = "Latitude must be within -90 and 90";
-      if (lng === undefined || lng < -180 || lng > 180) errors.lng = "Longitude must be within -180 and 180";
+      if (lat === null || lat < -90 || lat > 90) errors.lat = "Latitude must be within -90 and 90";
+      if (lng === null || lng < -180 || lng > 180) errors.lng = "Longitude must be within -180 and 180";
       if (!name || name.length > 50) errors.name = "Name must be less than 50 characters";
       if (!description) errors.description = "Description is required";
       if (price === undefined || price <= 0) errors.price = "Price per day must be a positive number";
@@ -209,7 +223,7 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
               errors,
           });
       }
-  
+  console.log('updating spot:', {address, city, state, country, name, price, description, lat, lng})
       // Update the spot
       spot.address = address || spot.address;
       spot.city = city || spot.city;
@@ -222,13 +236,14 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
       spot.price = price || spot.price;
   
       await spot.save();
+      console.log('updated spot', spot)
       return res.json(spot);
     } catch (err) {
      next(err)}
   });
   
   // Delete a Spot
-  router.delete('/:spotId', requireAuth, async (req, res) => {
+  router.delete('/:spotId', requireAuth, async (req, res, next) => {
     const { spotId } = req.params;
     const { user } = req;
   

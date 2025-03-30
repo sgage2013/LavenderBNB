@@ -44,6 +44,9 @@ module.exports = {
       price: {
         type: Sequelize.DECIMAL
       },
+      previewImage: {
+        type: Sequelize.TEXT
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
