@@ -25,7 +25,7 @@ function CreateSpot() {
   });
 
   const handleFormData = (e) => {
-    setErrors({});
+    setErrors({})
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -78,7 +78,14 @@ function CreateSpot() {
         ...formData,
         price: parseFloat(formData.price),
         lat: parseFloat(formData.lat),
-        lng: parseFloat(formData.lng)
+        lng: parseFloat(formData.lng),
+        images: [
+         formData.previewImage,
+         formData.imageTwo,
+         formData.imageThree,
+         formData.imageFour,
+         formData.imageFive,
+        ].filter((image) => image)
     };
 
     const res = await dispatch(createSpot(createdSpot));

@@ -33,7 +33,6 @@ const UpdateSpot = () => {
   }, [dispatch, spotId])
 
   useEffect(() => {
-    console.log('Spot data:', spot)
     if (spot && spot.id === parseInt(spotId)) {
       setFormData(() => ({
         address: spot.address || "",

@@ -23,12 +23,14 @@ const ManageSpots = () => {
 
   useEffect(() => {
     dispatch(getUserSpot());
+    console.log('user spots', userSpots)
   }, [dispatch]);
 
   return (
     <div className="manage-spots">
       <h1>Manage Spots</h1>
-      {!userSpots && userSpots.length === 0 ? (
+      {console.log(userSpots)}
+      {userSpots.length === 0 ? (
         <NavLink to="/spots/new"> Create a New Spot</NavLink>
       ) : (
         <div>

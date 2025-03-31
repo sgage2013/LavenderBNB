@@ -5,7 +5,7 @@ export const GET_SPOT_BY_ID = 'spots/getSpotById'
 export const UPDATE_SPOT = 'spots/updateSpot'
 export const GET_USER_SPOT = 'spots/getUserSpot'
 
-let initialState = { allSpots: null, singleSpot: null, userSpots: {} };
+let initialState = { allSpots: null, singleSpot: null, userSpots: [] };
 
 const spotsReducer = (state = initialState, action) => {
     switch(action.type) {
@@ -24,14 +24,9 @@ const spotsReducer = (state = initialState, action) => {
             }
         }
         case GET_USER_SPOT: {
-            const userSpotObject = {};
-            action.payload.forEach(spot => {
-                userSpotObject[spot.id] = spot;
-            });
-            console.log('update user spot object:', userSpotObject)
             return{
                 ...state,
-                userSpots: userSpotObject
+                userSpots: action.payload
             }
         }
             
@@ -39,7 +34,7 @@ const spotsReducer = (state = initialState, action) => {
             return{
                 ...state,
                 allSpots: {...state.allSpots, [action.payload.id]: action.payload},
-                createdSpot: action.paylaod
+                createdSpot: action.payload
             }
         }
         case DELETE_SPOT: {
