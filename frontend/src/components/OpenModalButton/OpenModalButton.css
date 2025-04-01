@@ -1,0 +1,9 @@
+.open-modal-button{
+    padding: 10px 15px;
+    font-size: 13px;
+  background-color: #262728;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

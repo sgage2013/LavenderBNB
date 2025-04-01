@@ -80,7 +80,7 @@ router.put("/:reviewId", requireAuth, validateReview, async (req, res) => {
 router.delete('/:reviewId', requireAuth, async (req, res) => {
     const {reviewId} = req.params;
     const {user} = req;
-
+    
     try {
         const review = await Review.findByPk(reviewId);
         if(!review){
