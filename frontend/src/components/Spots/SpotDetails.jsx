@@ -28,8 +28,8 @@ function SpotDetails() {
       dispatch(getSpotReviews(id));
     }
   }, [dispatch, id, singleSpot]);
+  
   useEffect(() => {
-    console.log("Reviews changed", reviews)
   }, [reviews])
 
   if (!reviews || !singleSpot) {
