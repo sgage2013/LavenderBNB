@@ -3,6 +3,7 @@
 const { Booking } = require('../models');
 
 let options= {};
+options.validate = true
 if (process.env.NODE_ENV === 'production'){
   options.schema = process.env.SCHEMA
 }
@@ -64,7 +65,7 @@ module.exports = {
       endDate: "2025-02-27T08:12:00.000Z"
     },
 
-   ])
+   ], options)
   },
 
   async down (queryInterface, Sequelize) {

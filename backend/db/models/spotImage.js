@@ -15,8 +15,9 @@ module.exports = (sequelize, DataTypes) => {
      type: DataTypes.INTEGER,
      allowNull: false,
      references: {
-        model: "Spot"
-     },onDelete: "CASCADE"
+        model: "Spots"
+     },
+     onDelete: "CASCADE"
    },
    url: {
      type: DataTypes.TEXT,
@@ -25,6 +26,7 @@ module.exports = (sequelize, DataTypes) => {
    preview: {
      type: DataTypes.BOOLEAN,
      allowNull:false,
+     defaultValue: false
    }
  }, {
    sequelize,

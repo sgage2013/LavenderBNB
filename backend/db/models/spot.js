@@ -22,8 +22,9 @@ module.exports = (sequelize, DataTypes) => {
   Spot.init({
     ownerId: {
       type: DataTypes.INTEGER,
+      allowNull:false,
       references:{
-        model:"User"
+        model:"Users"
       },onDelete:"CASCADE"
     },
     address: {
@@ -59,10 +60,10 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-        unique: true,
+        unique: false,
     },
     description: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
         unique: false,
     },
@@ -74,7 +75,7 @@ module.exports = (sequelize, DataTypes) => {
     previewImage: {
       type: DataTypes.TEXT,
       allowNull: false,
-      unique: false,
+        unique: false,
     }
   }, {
     sequelize,

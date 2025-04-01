@@ -16,7 +16,7 @@ module.exports = {
         allowNull:false,
          type: Sequelize.INTEGER,
          references: {
-            model: 'Spots'
+            model: "Spots"
          }, 
          onDelete:"CASCADE",
       },
@@ -26,9 +26,11 @@ module.exports = {
           model: "Users"
         },
         onDelete: "CASCADE",
+        allowNull: false
       },
       review: {
         type: Sequelize.STRING,
+        allowNull: false
       },
       stars: {
         type: Sequelize.INTEGER,

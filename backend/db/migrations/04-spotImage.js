@@ -7,12 +7,6 @@ if (process.env.NODE_ENV === 'production') {
 
 module.exports = {
  async up (queryInterface, Sequelize) {
-   /**
-    * Add altering commands here.
-    *
-    * Example:
-    * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
-    */
    await queryInterface.createTable(
      "SpotImages",
      {
@@ -26,22 +20,24 @@ module.exports = {
          allowNull:false,
          type: Sequelize.INTEGER,
          references: {
-            model: 'Spots'
+            model: "Spots"
          }, 
          onDelete:"CASCADE",
        },
        url: {
          allowNull: false,
          type: Sequelize.TEXT,
+         unique: false
        },
        preview: {
          allowNull: false,
          type: Sequelize.BOOLEAN,
+         defaultValue: false
        },
        createdAt: {
          allowNull: false,
          type: Sequelize.DATE,
-       defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
        },
        updatedAt: {
          allowNull: false,
@@ -49,8 +45,7 @@ module.exports = {
          defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
        },
      },
-     options
-   )
+     options)
  },
  async down(queryInterface, Sequelize) {
     options.tableName = 'SpotImages';

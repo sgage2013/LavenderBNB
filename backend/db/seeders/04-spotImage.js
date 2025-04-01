@@ -3,6 +3,7 @@
 const { SpotImage } = require('../models');
 
 let options = {};
+options.validate = true
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
@@ -61,7 +62,7 @@ module.exports = {
       },
 
 
-    ], { validate: true });
+    ], options);
   },
 
   async down (queryInterface, Sequelize) {
