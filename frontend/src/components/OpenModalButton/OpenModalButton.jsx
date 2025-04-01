@@ -1,4 +1,5 @@
 import { useModal } from '../../context/modal'
+import './OpenModalButton.css'
 
 function OpenModalButton({
   modalComponent, 
@@ -14,7 +15,7 @@ function OpenModalButton({
     if (typeof onItemClick === "function") onItemClick();
   };
 
-  return <button onClick={onClick}>{itemText}</button>;
+  return <button onClick={onClick} className='open-modal-button'>{itemText}</button>;
 }
 
 export default OpenModalButton;

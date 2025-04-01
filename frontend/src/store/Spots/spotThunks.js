@@ -66,7 +66,6 @@ export const deleteSpot = (spotId) => async (dispatch) => {
   const res = await csrfFetch(`/api/spots/${spotId}`, {
     method: "DELETE",
   });
-  // const id = await res.json()
   if (res.ok) {
     dispatch({
       type: DELETE_SPOT,

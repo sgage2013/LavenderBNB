@@ -18,14 +18,20 @@ export const createReview = (spotId, reviewData) => async (dispatch) => {
     body: JSON.stringify(reviewData),
   });
   const newReview = await res.json();
+  console.log(newReview)
   dispatch({
     type: CREATE_REVIEW,
-    payload: { spotId, newReview },
+    payload: { 
+      spotId: spotId, 
+      newReviews: [newReview] 
+    },
   });
+  dispatch(getSpotReviews(spotId))
   return newReview;
 };
 export const deleteReview = (reviewId) => async (dispatch) => {
-  const res = await csrfFetch(`/api/spots/${reviewId}`, {
+  console.log('reviewId', reviewId)
+  const res = await csrfFetch(`/api/reviews/${reviewId}`, {
     method: "DELETE",
   });
   if (res.ok) {

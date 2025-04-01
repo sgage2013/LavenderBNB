@@ -18,10 +18,13 @@ const reviewsReducer = (state = initialState, action) => {
       return newState;
     }
     case CREATE_REVIEW: {
+      const reviews = state.reviews || []
+      const existingReviews = reviews[action.payload.spotId] || [];
       const newReviews = [
-        ...state.reviews[action.payload.spotId],
-        action.payload.newReviews,
+       ...existingReviews,
+        ...action.payload.newReviews,
       ];
+      console.log(Array.isArray(newReviews))
       return {
         ...state,
         reviews: {
@@ -30,18 +33,11 @@ const reviewsReducer = (state = initialState, action) => {
         },
       };
     }
-    case DELETE_REVIEW: {
-      const newReviews = state.reviews[action.payload.spotId].filter(
-        (review) => review.id !== action.payload.reviewId
-      );
-      return {
-        ...state,
-        reviews: {
-          ...state.reviews,
-          [action.payload.spotId]: newReviews,
-        },
-      };
-    }
+              case DELETE_REVIEW: {
+                const newState = {...state, reviews: {...state.reviews}};
+                delete newState.reviews[action.payload]
+                return newState;
+            }
     default:
       return state;
   }

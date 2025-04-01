@@ -29,7 +29,6 @@ const spotsReducer = (state = initialState, action) => {
                 userSpots: action.payload
             }
         }
-            
         case CREATE_SPOT: {
             return{
                 ...state,
