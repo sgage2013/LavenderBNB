@@ -2,6 +2,7 @@ import{ useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllSpots } from "../../store/Spots/spotThunks";
 import SpotTile from "./SpotTile";
+import './SpotListing.css'
 
 
 

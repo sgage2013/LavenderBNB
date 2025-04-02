@@ -1,15 +1,14 @@
 .profile-dropdown{
-position: absolute;
+position: relative;
 top: 100%;
 background-color: gray;
 border: 1px solid black;
 border-radius: 5px;
 padding: 10px;
-display: none;
 }
 
 .profile-dropdown.hidden{
-    display: none;
+    display: none 
 }
 
 .profile-dropdown li{

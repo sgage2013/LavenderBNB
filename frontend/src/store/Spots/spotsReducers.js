@@ -30,15 +30,17 @@ const spotsReducer = (state = initialState, action) => {
             }
         }
         case CREATE_SPOT: {
-            return{
-                ...state,
-                allSpots: {...state.allSpots, [action.payload.id]: action.payload},
-                createdSpot: action.payload
-            }
+            const newState={
+            ...state,
+            allSpots: {...state.allSpots, [action.payload.id]: action.payload},
+            userSpots: {...state.allSpots, [action.payload.id]: action.payload},
+            singleSpot: action.payload,
         }
+        return newState
+    }
         case DELETE_SPOT: {
-            const newState = {...state, spots: {...state.spots}};
-            delete newState.spots[action.payload]
+            const newState = {...state, allSpots: {...state.spots}};
+            delete newState.allSpots[action.payload]
             return newState;
         }
         case UPDATE_SPOT: {
@@ -53,7 +55,5 @@ const spotsReducer = (state = initialState, action) => {
     }
     
 }
-
-// spotsReducer(initialState,GET_ALL_SPOTS)
 
 export default spotsReducer

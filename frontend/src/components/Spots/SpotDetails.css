@@ -1,0 +1,28 @@
+/* .spot-details-container{
+    display: flex;
+} */
+.spot-details{
+    max-width: 1000px;
+    margin: 20px auto;
+}
+.spot-details h1{
+    margin-bottom: 10px;
+}
+.spot-image{
+    width: 80%;
+    margin: 0 auto;
+}
+.spot-image img{
+    width: 100%;
+    height: 250px;
+  
+}
+.review-items{
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+.price-reserve-button{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

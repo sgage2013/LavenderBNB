@@ -11,7 +11,6 @@ import {
 export const getAllSpots = () => async (dispatch) => {
   const res = await csrfFetch("/api/spots");
   const spotsData = await res.json();
-  console.log("spot", spotsData);
   dispatch({
     type: GET_ALL_SPOTS,
     payload: spotsData.Spots,
@@ -23,13 +22,12 @@ export const getSpotById = (spotId) => async (dispatch) => {
   const spotsData = await res.json();
   dispatch({
     type: GET_SPOT_BY_ID,
-    payload: spotsData.Spot,
+    payload: spotsData,
   });
 };
 export const getUserSpot = () => async (dispatch) => {
   const res = await csrfFetch("/api/spots/current");
   const spotsData = await res.json();
-  console.log("user spots:", spotsData);
   dispatch({
     type: GET_USER_SPOT,
     payload: spotsData.Spots,

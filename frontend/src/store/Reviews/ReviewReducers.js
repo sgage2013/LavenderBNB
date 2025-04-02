@@ -24,7 +24,6 @@ const reviewsReducer = (state = initialState, action) => {
        ...existingReviews,
         ...action.payload.newReviews,
       ];
-      console.log(Array.isArray(newReviews))
       return {
         ...state,
         reviews: {

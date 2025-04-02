@@ -113,7 +113,6 @@ router.get("/current", requireAuth, async (req, res, next) => {
 
 // Get details of a Spot from an id
 router.get("/:spotId", async (req, res, next) => {
-  console.log('spot id from params', req.params.spotId)
   const spotId = parseInt(req.params.spotId);
   try {
     const spot = await Spot.findByPk(spotId, {
@@ -121,7 +120,7 @@ router.get("/:spotId", async (req, res, next) => {
         { model: SpotImage },
         {
           model: User,
-          attributes: ["firstName", "lastName"],
+          attributes: ["firstName", "lastName", "id"],
         },
       ],
     });
@@ -133,10 +132,7 @@ router.get("/:spotId", async (req, res, next) => {
       where: {spotId: spotId},
       include: [User, ReviewImage],
     });
-    console.log('reviews:', reviews)
-    if (reviews.length === 0) {
-      return res.status(404).json({ message: 'No reviews found for this spot'})
-    }
+   
     let totalStars = 0;
     reviews.forEach((review) => {
       totalStars += review.stars
@@ -144,7 +140,9 @@ router.get("/:spotId", async (req, res, next) => {
     const avgRating = reviews.length > 0 ? (totalStars / reviews.length).toFixed(1) : 0;
 
     res.json({ 
-      Spot: spot,
+      ...spot.toJSON(),
+      User: spot.User,
+      SpotImages: spot.SpotImages,
       reviews: reviews,
       avgRating: avgRating });
   } catch (err) {
@@ -318,7 +316,13 @@ router.put("/:spotId", requireAuth, async (req, res, next) => {
     if (createImages.length > 0) {
       await SpotImage.bulkCreate(createImages);
     }
-    return res.json(spot);
+    const updatedSpotWithUser =  await Spot.findByPk(spotId, {
+      include: [
+        {model: SpotImage},
+        {model: User, attributes: ["id", 'firstName', "lastName"]} 
+      ]
+    })
+    return res.json(updatedSpotWithUser);
   } catch (err) {
     next(err);
   }
@@ -369,7 +373,6 @@ router.post("/:spotId/images", requireAuth, async (req, res, next) => {
 
 //Get all reviews by a spots id
 router.get("/:spotId/reviews", async (req, res) => {
-  console.log('hellooooooooo')
   const spotId = parseInt(req.params.spotId);
 
   const spot = await Spot.findByPk(spotId);
@@ -383,10 +386,6 @@ router.get("/:spotId/reviews", async (req, res) => {
     include: [User, ReviewImage],
     order: [["createdAt", "DESC"]]
   });
-  console.log('reviews:', reviews)
-  if (reviews.length === 0) {
-    return res.status(404).json({message: 'No reviews found for this spot'})
-  }
 
   res.json({ Reviews: reviews });
 });

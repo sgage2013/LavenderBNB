@@ -1,9 +1,15 @@
 .spot-listing{
     display: grid;
-    grid-template-columns: 250px repeat(auto-fill, 250px) 
+    grid-template-columns: 250px repeat(auto-fill, 250px); 
+    gap: 40px;
+    padding: 30px;
 }
 .spot-photo{
     width: 100%;
     max-width: 250px;
     height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }

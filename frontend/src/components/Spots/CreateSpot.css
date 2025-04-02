@@ -1,0 +1,60 @@
+.spot-form{
+    max-width: 500px;
+    margin: 30px auto;
+}
+.spot-form h2{
+    margin-bottom: 10px;
+    font-size: larger;
+}
+.spot-form span{
+    display: block;
+    margin-bottom: 10px;
+    font-size: medium;
+    font-weight: 250;
+}
+.spot-form form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px
+}
+.form-submit{
+    display: flex;
+    flex-direction: column;
+    gap: 15px
+}
+.form-submit-2{
+    display: grid;
+    grid-template-columns: 150px 100px;
+    gap: 15px
+}
+.form-submit-3{
+    display: grid;
+    grid-template-columns: 150px 100px;
+}
+.spot-form label{
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.spot-form input{
+    padding: 5px;
+    border-radius: 5px;
+    font-size: smaller;
+}
+.spot-form textarea{
+    padding: 5px;
+    border-radius: 5px;
+    font-size: medium;
+    resize: vertical;
+}
+.spot-form button{
+    padding: 12px 20px;
+    background-color: gray;
+}
+.errors{
+    color: red;
+    font-size: small;
+    margin-top: 5px;
+}
+.form-submit-2 errors{
+    grid-column: 1 / -1;
+}

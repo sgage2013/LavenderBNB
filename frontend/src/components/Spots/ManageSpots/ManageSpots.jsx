@@ -5,6 +5,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import SpotTile from "../../LandingPage/SpotTile";
 import DeleteSpotModal from "../DeleteSpotModal";
 import OpenModalButton from "../../OpenModalButton/OpenModalButton";
+import './ManageSpots.css'
 
 const ManageSpots = () => {
   const dispatch = useDispatch();
@@ -23,34 +24,47 @@ const ManageSpots = () => {
 
   useEffect(() => {
     dispatch(getUserSpot());
-    console.log('user spots', userSpots)
   }, [dispatch]);
 
   return (
     <div className="manage-spots">
       <h1>Manage Spots</h1>
-      {console.log(userSpots)}
+        
       {userSpots.length === 0 ? (
-        <NavLink to="/spots/new"> Create a New Spot</NavLink>
+        <NavLink className='create-spot-button' to="/spots/new"> Create a New Spot</NavLink>
       ) : (
-        <div>
+        <div className="spots-grid">
           {spotsArray &&
             spotsArray.map((spot) => (
-              <div
+              <div className='spot-tile'
                 key={spot.id}
                 onClick={(e) => handleNavigation(e, spot.id, null)}
               >
-                <SpotTile spot={spot} />
+                <div className='spot-image'>
+                  <NavLink to={`/spots/${spot.id}`}>
+                  <img src={spot.previewImage} alt={spot.name}/>
+                  </NavLink>
+                  </div>
+                {/* <SpotTile spot={spot} /> */}
+                <div className="spot-details">
+                  <p>{spot.city}, {spot.state}</p>
+                  <p>{spot.price} night</p>
+                  <p>Rating: {spot.avgRating || "New"}</p>
+                  </div>
+                  <div className='spots-actions'>
                 <button
                   onClick={(e) => handleNavigation(e, spot.id, "edit")}
                   className="update-spots-button"
                 >
-                  Update Your Spot
+                  Update
                 </button>
+                <div className="delete-spot">
                 <OpenModalButton 
-        itemText="Delete Your Spot"
+        itemText="Delete"
         modalComponent={<DeleteSpotModal spotId={spot.id}/>}
       />
+      </div>
+      </div>
               </div>
             ))}
         </div>

@@ -18,7 +18,7 @@ export const createReview = (spotId, reviewData) => async (dispatch) => {
     body: JSON.stringify(reviewData),
   });
   const newReview = await res.json();
-  console.log(newReview)
+
   dispatch({
     type: CREATE_REVIEW,
     payload: { 
@@ -30,7 +30,6 @@ export const createReview = (spotId, reviewData) => async (dispatch) => {
   return newReview;
 };
 export const deleteReview = (reviewId) => async (dispatch) => {
-  console.log('reviewId', reviewId)
   const res = await csrfFetch(`/api/reviews/${reviewId}`, {
     method: "DELETE",
   });

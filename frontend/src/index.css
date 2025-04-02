@@ -1,16 +1,14 @@
-/* :root {
+:root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-
+  overflow: visible;
   color-scheme: light dark;
   color: rgb(255, 255, 255);
   background-color: #242424;
 
   
 }
-
 a {
   font-weight: 500;
   color: #646cff;
@@ -39,4 +37,4 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
- */
+

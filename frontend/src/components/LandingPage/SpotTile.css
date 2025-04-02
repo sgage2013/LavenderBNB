@@ -1,0 +1,22 @@
+.spot-details h2{
+ text-align: left;
+ font-size: medium;
+ margin-bottom: 9px;
+}
+.spot-details p {
+    text-align: left;
+    font-size: small;
+    margin-bottom: .5px;
+}
+.spot-name{
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+    padding: 1px;
+    margin-bottom: 5px;
+}
+.spot-link{
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+}

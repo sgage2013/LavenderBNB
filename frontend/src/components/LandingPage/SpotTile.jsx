@@ -1,13 +1,12 @@
 import noPhoto from '../../assets/noPhoto.png'
 import { NavLink } from 'react-router-dom';
-import './SpotListing.css';
+import './SpotTile.css';
 
 
 function SpotTile ({ spot }) {
     const {id, name, city, state, price, previewImage, rating} = spot;
     const spotRating = rating ? rating : 'New'
     const imgSrc = previewImage || noPhoto
-
 
     return  (
         <div className="spot-name">
